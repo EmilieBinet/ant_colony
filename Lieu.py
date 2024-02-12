@@ -6,9 +6,9 @@ class Lieu:
 
     def __init__(self, xinit=None, yinit=None, nameinit=None):
         if xinit is None:
-            xinit = np.random.rand()*LARGEUR
+            xinit = np.random.randint(DIAMETRE, LARGEUR - DIAMETRE)
         if yinit is None:
-            yiniy = np.random.rand()*LONGUEUR
+            yiniy = np.random.randint(DIAMETRE, LONGUEUR - DIAMETRE)
         if nameinit is None:
             nameinit = "noname"
         self.x = xinit
