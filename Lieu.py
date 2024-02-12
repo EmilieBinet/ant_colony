@@ -10,6 +10,8 @@ class Lieu:
             yiniy = np.random.rand()*LONGUEUR
         if nameinit is None:
             nameinit = "noname"
+
+    def __init__(self, xinit, yinit, nameinit):
         self.x = xinit
         self.y = yinit
         self.name = nameinit
