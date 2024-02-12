@@ -6,7 +6,7 @@ import random
 import time
 import pandas
 import csv
-import Lieu
+from Lieu import Lieu
 
 LARGEUR = 800
 HAUTEUR = 600
@@ -19,7 +19,8 @@ class matrice_od:
 class Graph:
 
     def __init__(self):
-        for i in range(1, NB_LIEUX):
+        self.liste_lieux = []
+        for i in range(NB_LIEUX):
             Lieu(None, None,str(i))
             self.liste_lieux.append(Lieu)
         self.matrice_cout = matrice_od()
