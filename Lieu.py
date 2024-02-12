@@ -1,3 +1,4 @@
+from tsp_graph_init import LONGUEUR, LARGEUR, numpy as np
 class Lieu:
     x = 0
     y = 0
@@ -10,8 +11,6 @@ class Lieu:
             yiniy = np.random.rand()*LONGUEUR
         if nameinit is None:
             nameinit = "noname"
-
-    def __init__(self, xinit, yinit, nameinit):
         self.x = xinit
         self.y = yinit
         self.name = nameinit
