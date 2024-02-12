@@ -12,3 +12,5 @@ import pandas as pd
 import tkinter as tk
 import csv
 
+LARGEUR = 800
+HAUTEUR = 600
