@@ -3,11 +3,13 @@ class Lieu:
     y = 0
     name = ""
 
-<<<<<<< HEAD
-=======
-<<<<<<< HEAD
->>>>>>> 549be19a27ab42b26ce11b0027337165364bc2b4
-    def __init__(self, xinit, yinit, nameinit):
+    def __init__(self, xinit=None, yinit=None, nameinit=None):
+        if xinit is None:
+            xinit = np.random.rand()*LARGEUR
+        if yinit is None:
+            yiniy = np.random.rand()*LONGUEUR
+        if nameinit is None:
+            nameinit = "noname"
         self.x = xinit
         self.y = yinit
         self.name = nameinit
@@ -18,11 +20,3 @@ class Lieu:
     
     def __repr__(self):
         return "('+str(self.x)','+str(self.y)')"
-<<<<<<< HEAD
-=======
-=======
-    def distance(self, x2, y2):
-        dist = ((x2-self.X)**2 + (y2-self.y)**2)**(1/2)
-        return dist
->>>>>>> 0fcb1c4a4daafb030f10d111645cc63f1ba8f1e6
->>>>>>> 549be19a27ab42b26ce11b0027337165364bc2b4
