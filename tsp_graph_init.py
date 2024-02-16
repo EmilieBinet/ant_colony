@@ -27,4 +27,4 @@ for i in range(0,N_ITERATION):
     route = Route(graph)
     print(route)
 
-fenetre = Affichage(graph, route, HAUTEUR, LARGEUR, NB_LIEUX)
+    fenetre = Affichage(graph, route, HAUTEUR, LARGEUR, NB_LIEUX)#fonctionne pour ce test unitaire

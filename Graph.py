@@ -65,8 +65,11 @@ class Graph:
     
     def charger_matrice_od(self, csv_file):
         with open(csv_file, 'r') as f:
+            
             matrice = csv.reader(f)
         self.matrice_cout = Matrice_od(matrice)
+
+
 
     def __repr__(self):
             return f'Graph(\'{self.liste_lieux}\', {self.matrice_cout})'

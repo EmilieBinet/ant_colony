@@ -1,8 +1,7 @@
 # from Graph import Graph
 # from Route import Route
-import tkinter as tk
-from tkinter import ttk
-from tsp_graph_init import *
+
+from define import *
 
 class Affichage (tk.Tk):
     def __init__(self, graph, route, hauteur, largeur, NB_LIEUX) -> None:
