@@ -13,12 +13,13 @@ import tkinter as tk
 import csv
 
 #Import Class
-import Graph
-import Lieu
-import Route
-import Affichage
+#from Graph import Graph
+# import Lieu
+# import Route
+#import Affichage
 
 LARGEUR = 800
 HAUTEUR = 600
+DIAMETRE = 30
 
-g = Graph()
+# g = Graph()
