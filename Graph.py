@@ -1,17 +1,10 @@
 """
 Memorisation d'une liste de lieux """
 
-import numpy as np
-import random
-import time
-import pandas
-import csv
-from Lieu import Lieu
+import define
+from define import *
+import Lieu
 
-LARGEUR = 800
-HAUTEUR = 600
-NB_LIEUX = 5
-DIAMETRE = 30
 class matrice_od:
     def __init__(self):
         self.matrice = np.matrix([np.zeros(NB_LIEUX), np.zeros(NB_LIEUX)])

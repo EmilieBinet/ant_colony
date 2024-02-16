@@ -1,4 +1,6 @@
-from tsp_graph_init import LONGUEUR, LARGEUR, numpy as np
+from define import *
+
+
 class Lieu:
     x = 0
     y = 0
@@ -8,7 +10,7 @@ class Lieu:
         if xinit is None:
             xinit = np.random.randint(DIAMETRE, LARGEUR - DIAMETRE)
         if yinit is None:
-            yiniy = np.random.randint(DIAMETRE, LONGUEUR - DIAMETRE)
+            yiniy = np.random.randint(DIAMETRE, HAUTEUR - DIAMETRE)
         if nameinit is None:
             nameinit = "noname"
         self.x = xinit
