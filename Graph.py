@@ -7,9 +7,12 @@ from Lieu import Lieu
 class matrice_od:
     def __init__(self, matrice=None):
         if matrice == None:
-            self.matrice = np.matrix([np.zeros(NB_LIEUX), np.zeros(NB_LIEUX)])
+            self.matrice = np.zeros((NB_LIEUX, NB_LIEUX)) # matrice de 0
         else:
             self.matrice = matrice
+
+    def __repr__(self):
+        return f'Matrice_od({self.matrice})'
 
 class Graph:
 
@@ -27,12 +30,13 @@ class Graph:
             self.charger_matrice_od(csv_matrice)
     
     def calcul_matrice_cout_od(self):
-        for i in range(1, NB_LIEUX):
+        print(self.matrice_cout)
+        for i in range(0, NB_LIEUX):
             for j in range(i, NB_LIEUX):
-                lieu_i, lieu_j = self.list_lieux[i], self.list_lieux[j]
+                lieu_i, lieu_j = self.liste_lieux[i], self.liste_lieux[j]
                 dist = lieu_i.distance(lieu_j)
-                self.matrice_cout[i][j] = dist
-                self.matrice_cout[j][i] = dist
+                self.matrice_cout.matrice[i][j] = dist
+                self.matrice_cout.matrice[j][i] = dist
                 
     
     def plus_proche_voisin(self, lieu, pot_voisins):
@@ -40,21 +44,21 @@ class Graph:
         lieu = classe Lieu : (x,y,name)
         pot_voisins = liste de classes Lieu : [(x,y,name),(x,y,name)]
         '''
-        min = float(inf) # tres grande valeur
-        ligne = self.matrice_od[int(lieu.name)] # liste avec distance entre lieu et chaque autre lieu (comprend aussi sa distance avec lui même)
+        min = float('inf') # tres grande valeur
+        ligne = list(self.matrice_cout.matrice[int(lieu.name)]) # liste avec distance entre lieu et chaque autre lieu (comprend aussi sa distance avec lui même)
         to_del = []
-        
-        for i in range(len(NB_LIEUX)):
+        for i in range(NB_LIEUX):
             if not any(voisin.name == str(i) for voisin in pot_voisins): # si aucun lieu dans la liste de potentiels voisins n'a le nom de l'indice
                 to_del.append(ligne[i]) # retiens l'element a supprimer
         for elem in to_del:
             ligne.remove(elem) # supprime chaque element
-
+        print(f'ligne: {ligne}')
         for i in range(len(ligne)):
             if ligne[i] < min:
                 min = ligne[i]
-                closest_N = str(i)
-        return (lieu for lieu in self.liste_lieux if lieu.name == closest_N)
+                closest_N = i
+        print(f'closestN: {closest_N}')
+        return pot_voisins[closest_N]
     
     def charger_graph(self, csv_file):
         with open(csv_file, 'r') as f:
@@ -66,3 +70,5 @@ class Graph:
             matrice = csv.reader(f)
         self.matrice_cout = matrice_od(matrice)
 
+    def __repr__(self):
+            return f'Graph(\'{self.liste_lieux}\', {self.matrice_cout})'

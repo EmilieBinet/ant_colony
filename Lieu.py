@@ -18,8 +18,8 @@ class Lieu:
     
 
     def distance(self, lieu2):
-        dist = ((lieu2.x2-self.X)**2 + (lieu2.y2-self.y)**2)**(1/2)
-        return dist
+        dist = ((lieu2.x-self.x)**2 + (lieu2.y-self.y)**2)**(1/2)
+        return round(dist,1)
     
     def __repr__(self):
-        return "('+str(self.x)','+str(self.y)')"
+        return f'Lieu(\'{self.name}\', {self.x}, {self.y})'

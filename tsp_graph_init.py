@@ -7,8 +7,23 @@ Created on Mon Feb 12 14:36:13 2024
 from define import *
 
 #Import Class
-#from Graph import Graph
-# import Lieu
-# import Route
-#import Affichage
+from Graph import Graph
+from Lieu import Lieu
+from Route import Route
+# from Affichage import Affichage
+
+#tests unitaires
+lieu = Lieu()
+lieu2 = Lieu(1,1,"0")
+print(lieu)
+print(lieu2)
+
+graph = Graph()
+print(graph)
+graph.calcul_matrice_cout_od()
+print(graph)
+
+route = Route(graph)
+print(route)
+
 
