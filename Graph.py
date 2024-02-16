@@ -18,7 +18,7 @@ class Graph:
         self.liste_lieux = []
         if csv_lieux == None:
             for i in range(NB_LIEUX):
-                Lieu(None, None,str(i))
+                Lieu(None, None, str(i))
                 self.liste_lieux.append(Lieu)
         else:
             self.charger_graph(csv_lieux)
@@ -36,10 +36,26 @@ class Graph:
                 self.matrice_cout[j][i] = dist
                 
     
-    def plus_proche_voisin(self, lieu, voisin):
-        ligne = self.matrice_od[lieu, voisin]
-        closest_N = np.argmin(ligne)
-        return closest_N
+    def plus_proche_voisin(self, lieu, pot_voisins):
+        '''
+        lieu = classe Lieu : (x,y,name)
+        pot_voisins = liste de classes Lieu : [(x,y,name),(x,y,name)]
+        '''
+        min = float(inf) # tres grande valeur
+        ligne = self.matrice_od[int(lieu.name)] # liste avec distance entre lieu et chaque autre lieu (comprend aussi sa distance avec lui même)
+        to_del = []
+        
+        for i in range(len(NB_LIEUX)):
+            if not any(voisin.name == str(i) for voisin in pot_voisins): # si aucun lieu dans la liste de potentiels voisins n'a le nom de l'indice
+                to_del.append(ligne[i]) # retiens l'element a supprimer
+        for elem in to_del:
+            ligne.remove(elem) # supprime chaque element
+
+        for i in range(len(ligne)):
+            if ligne[i] < min:
+                min = ligne[i]
+                closest_N = str(i)
+        return (lieu for lieu in self.liste_lieux if lieu.name == closest_N)
     
     def charger_graph(self, csv_file):
         with open(csv_file, 'r') as f:
