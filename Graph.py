@@ -1,29 +1,31 @@
 """
 Memorisation d'une liste de lieux """
 
-import numpy as np
-import random
-import time
-import pandas
-import csv
-from Lieu import Lieu
+import define
+from define import *
+import Lieu
 
-LARGEUR = 800
-HAUTEUR = 600
-NB_LIEUX = 5
-DIAMETRE = 30
 class matrice_od:
-    def __init__(self):
-        self.matrice = np.matrix([np.zeros(NB_LIEUX), np.zeros(NB_LIEUX)])
+    def __init__(self, matrice=None):
+        if matrice == None:
+            self.matrice = np.matrix([np.zeros(NB_LIEUX), np.zeros(NB_LIEUX)])
+        else:
+            self.matrice = matrice
 
 class Graph:
 
-    def __init__(self):
+    def __init__(self, csv_lieux=None, csv_matrice=None):
         self.liste_lieux = []
-        for i in range(NB_LIEUX):
-            lieu = Lieu(None, None,str(i))
-            self.liste_lieux.append(lieu)
-        self.matrice_cout = matrice_od()
+        if csv_lieux == None:
+            for i in range(NB_LIEUX):
+                lieu = Lieu(None, None,str(i))
+                self.liste_lieux.append(lieu)
+        else:
+            self.charger_graph(csv_lieux)
+        if csv_matrice == None:
+            self.matrice_cout = matrice_od()
+        else:
+            self.charger_matrice_od(csv_matrice)
     
     def calcul_matrice_cout_od(self):
         for i in range(1, NB_LIEUX):
@@ -39,6 +41,13 @@ class Graph:
         closest_N = np.argmin(ligne)
         return closest_N
     
-    def calcul_distance_route():
-        return
+    def charger_graph(self, csv_file):
+        with open(csv_file, 'r') as f:
+            graph = csv.reader(f)
+        self.liste_lieux = graph
+    
+    def charger_matrice_od(self, csv_file):
+        with open(csv_file, 'r') as f:
+            matrice = csv.reader(f)
+        self.matrice_cout = matrice_od(matrice)
 

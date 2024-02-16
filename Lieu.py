@@ -1,3 +1,6 @@
+from define import *
+
+
 from tsp_graph_init import HAUTEUR, LARGEUR, DIAMETRE, np
 
 class Lieu:
