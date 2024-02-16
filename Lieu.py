@@ -1,8 +1,5 @@
 from define import *
 
-
-from tsp_graph_init import HAUTEUR, LARGEUR, DIAMETRE, np
-
 class Lieu:
     x = 0
     y = 0
