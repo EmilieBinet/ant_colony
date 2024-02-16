@@ -15,7 +15,7 @@ class Lieu:
         self.x = xinit
         self.y = yinit
         self.name = nameinit
-        print(self.x)
+    
 
     def distance(self, lieu2):
         dist = ((lieu2.x2-self.X)**2 + (lieu2.y2-self.y)**2)**(1/2)
