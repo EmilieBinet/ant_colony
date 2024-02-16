@@ -16,7 +16,7 @@ class Graph:
         else:
             self.charger_graph(csv_lieux)
         if csv_matrice == None:
-            self.matrice_cout = Matrice_od()
+            self.matrice_cout = Matrice_od(None)
         else:
             self.charger_matrice_od(csv_matrice)
     

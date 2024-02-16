@@ -1,7 +1,8 @@
 from define import *
 
 class Matrice_od:
-    def __init__(self, matrice=None):
+    def __init__(self, matrice):
+        
         if matrice == None:
             self.matrice = np.zeros((NB_LIEUX, NB_LIEUX)) # matrice de 0
         else:

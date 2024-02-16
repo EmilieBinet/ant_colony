@@ -1,5 +1,4 @@
 from define import *
-from tsp_graph_init import *
 from Affichage import Affichage
 from Lieu import Lieu
 from Matrice_od import Matrice_od
@@ -8,7 +7,8 @@ from Route import Route
 
 class TSP_ACO():
     def __init__(self) -> None:
-        mat_pheromones = Matrice_od(np.ones((NB_LIEUX, NB_LIEUX)))
+        mat_pheromones = Matrice_od(np.ones((NB_LIEUX, NB_LIEUX)))#Problème ici  : tente de créer une matrice_od, or la classe veut en argument une matrice = None
+        #mat_pheromones = mat_pheromones()
         mat_prob_dist= Matrice_od()
 
     def init_prob_dist(self, matrice_cout):
