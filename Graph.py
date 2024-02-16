@@ -17,8 +17,8 @@ class Graph:
         self.liste_lieux = []
         if csv_lieux == None:
             for i in range(NB_LIEUX):
-                Lieu(None, None, str(i))
-                self.liste_lieux.append(Lieu)
+                lieu = Lieu(None, None, str(i))
+                self.liste_lieux.append(lieu)
         else:
             self.charger_graph(csv_lieux)
         if csv_matrice == None:
