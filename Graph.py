@@ -1,9 +1,8 @@
 """
 Memorisation d'une liste de lieux """
 
-import define
 from define import *
-import Lieu
+from Lieu import Lieu
 
 class matrice_od:
     def __init__(self, matrice=None):
