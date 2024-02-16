@@ -7,11 +7,8 @@ Created on Mon Feb 12 14:36:13 2024
 from define import *
 
 #Import Class
-import Graph
-import Lieu
-import Route
-import Affichage
+#from Graph import Graph
+# import Lieu
+# import Route
+#import Affichage
 
-
-
-g = Graph()
