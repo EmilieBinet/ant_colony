@@ -1,6 +1,8 @@
 from define import *
-
+import Graph
 class Route:
-    ordre = []
 
+    def __init__(self):
+        ordre = []
+        
     
