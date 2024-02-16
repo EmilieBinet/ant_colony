@@ -6,13 +6,16 @@ from tkinter import ttk
 class Affichage (tk.Tk):
     def __init__(self, hauteur, largeur, NB_LIEUX) -> None:
         g = Graph()
+        r = Route()
         liste_lieux = g.liste_lieux
+        route = r.ordre
+        print(route)
         tk.Tk.__init__(self)
         nb_it = 0
         best_dist = 0
         self.title("G2 - Algo fourmis")
         self.draw_lieu(liste_lieux, largeur, hauteur)
-        self.draw_route(liste_lieux[0])
+        self.draw_route(route, liste_lieux)
         self.d_evolution(nb_it, best_dist)
         self.bind("<space>", self.d_matrix)
         self.bind("<Escape>", self.close_f)
@@ -35,31 +38,35 @@ class Affichage (tk.Tk):
             self.canvas.create_oval(x, y, x+30, y+30)
 
 
-    def draw_route(self, lieu):
-        x = lieu.x
-        y = lieu.y
-        self.canvas.create_line(x+30, y+30, 623, 25, width=2)
-        pass
+    def draw_route(self, route, liste_lieux):
+        for i in range(len(route)-1):
+            for lieu in liste_lieux:
+                if lieu.name == route[i]:
+                    lieu_dep= lieu
+                if lieu.name == route[i+1]:
+                    lieu_arr = lieu
+            self.canvas.create_line(lieu_dep.x, lieu_dep.y, lieu_arr.x, lieu_arr.y, width=2)
 
     def draw_matrix(self, NB_LIEUX, hauteur):
         for i in range(NB_LIEUX):
             y = i*(hauteur/(NB_LIEUX))
             for j in range(NB_LIEUX):
                 x = j*(hauteur/(NB_LIEUX))
-                self.win.canvas.create_text(x+200, y+100, text=self.matrix[i][j], tags=self.matrix[i][j])
+                if i == 0 or j == 0:
+                    self.win.canvas.create_text(x+150, y+100, text=self.matrix[i][j], font=("bold"))
+                else: 
+                    self.win.canvas.create_text(x+150, y+100, text=self.matrix[i][j])
                 #self.win.canvas.create_rectangle(x+200,y, x+(hauteur/(NB_LIEUX)), y+(hauteur/(NB_LIEUX)))
-        # for row in self.matrix:
-        #     line = " | ".join(map(str, row))
-        #     self.matrix_text.insert(tk.END, line + '\n')
 
 
     def d_matrix(self, event):
         largeur = 800
         hauteur = 600
         self.matrix = [
-            [1, 2, 3],
-            [4, 5, 6],
-            [7, 8, 9]
+            [" ","1", "2", "3"],
+            ["1", 1, 2, 3],
+            ["2", 4, 5, 6],
+            ["3", 7, 8, 9]
         ]
         self.win = tk.Toplevel(self)
         self.win.title("Matrix of cost")
@@ -68,7 +75,7 @@ class Affichage (tk.Tk):
         # self.matrix_text = tk.Text(self.win, wrap=tk.NONE)
         # self.matrix_text.pack()
         
-        self.draw_matrix(3, hauteur)
+        self.draw_matrix(len(self.matrix[0]), hauteur)
         
 
 
