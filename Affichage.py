@@ -1,21 +1,22 @@
-from Graph import Graph
-from Route import Route
+# from Graph import Graph
+# from Route import Route
 import tkinter as tk
 from tkinter import ttk
+from tsp_graph_init import *
 
 class Affichage (tk.Tk):
-    def __init__(self, hauteur, largeur, NB_LIEUX) -> None:
-        g = Graph()
-        r = Route()
-        liste_lieux = g.liste_lieux
-        route = r.ordre
-        print(route)
+    def __init__(self, graph, route, hauteur, largeur, NB_LIEUX) -> None:
+        # g = Graph()
+        # r = Route()
+        liste_lieux = graph.liste_lieux
+        lst_route = route.ordre
+        print(lst_route)
         tk.Tk.__init__(self)
         nb_it = 0
         best_dist = 0
         self.title("G2 - Algo fourmis")
         self.draw_lieu(liste_lieux, largeur, hauteur)
-        self.draw_route(route, liste_lieux)
+        self.draw_route(lst_route, liste_lieux)
         self.d_evolution(nb_it, best_dist)
         self.bind("<space>", self.d_matrix)
         self.bind("<Escape>", self.close_f)
@@ -77,7 +78,6 @@ class Affichage (tk.Tk):
         
         self.draw_matrix(len(self.matrix[0]), hauteur)
         
-
 
     def close_f(self, event):
         self.destroy()

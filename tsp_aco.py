@@ -1,4 +1,5 @@
 from define import *
+from tsp_graph_init import *
 from Affichage import Affichage
 from Lieu import Lieu
 from Matrice_od import Matrice_od
@@ -7,7 +8,6 @@ from Route import Route
 
 class TSP_ACO():
     def __init__(self) -> None:
-        fenetre = Affichage(HAUTEUR, LARGEUR, NB_LIEUX)
         mat_pheromones = Matrice_od(np.ones((NB_LIEUX, NB_LIEUX)))
         mat_prob_dist= Matrice_od()
 

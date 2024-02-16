@@ -26,4 +26,4 @@ print(graph)
 route = Route(graph)
 print(route)
 
-
+fenetre = Affichage(graph, route, HAUTEUR, LARGEUR, NB_LIEUX)
