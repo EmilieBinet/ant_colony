@@ -10,7 +10,7 @@ from define import *
 from Graph import Graph
 from Lieu import Lieu
 from Route import Route
-# from Affichage import Affichage
+from Affichage import Affichage
 
 #tests unitaires
 lieu = Lieu()

@@ -1,9 +1,11 @@
 from define import *
 from Graph import Graph
+
 class Route:
 
     def __init__(self, graph=Graph()):
         self.ordre = ["0"]
+        dist_total = 0
         voisin = graph.liste_lieux[:]
         print(f"Liste_lieux : {graph.liste_lieux}")
         # del voisin[0] # retire 0 des voisins
@@ -14,6 +16,7 @@ class Route:
             #print(f'voisin: {voisin}')
             closest = graph.plus_proche_voisin(lieu_from, voisin)
             dist_total = graph.calcul_distance_route(dist_total, self.ordre[-1], closest)
+            print(f"Total : {dist_total}")
             self.ordre.append(closest.name)
             #print(f"ordre petit à petit: {self.ordre}")
         self.ordre.append("0")
