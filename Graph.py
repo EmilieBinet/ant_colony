@@ -21,8 +21,8 @@ class Graph:
     def __init__(self):
         self.liste_lieux = []
         for i in range(NB_LIEUX):
-            Lieu(None, None,str(i))
-            self.liste_lieux.append(Lieu)
+            lieu = Lieu(None, None,str(i))
+            self.liste_lieux.append(lieu)
         self.matrice_cout = matrice_od()
     
     def calcul_matrice_cout_od(self):
