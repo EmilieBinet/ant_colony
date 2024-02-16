@@ -9,12 +9,13 @@ class Route:
         # del voisin[0] # retire 0 des voisins
         while len(self.ordre) != NB_LIEUX:
             lieu_from=[lieu for lieu in graph.liste_lieux if lieu.name == self.ordre[-1]][0]
-            print(f'lieu passé: {lieu_from}')
+            #print(f'lieu passé: {lieu_from}')
             voisin.remove(lieu_from)
-            print(f'voisin: {voisin}')
+            #print(f'voisin: {voisin}')
             closest = graph.plus_proche_voisin(lieu_from, voisin)
+            dist_total = graph.calcul_distance_route(dist_total, self.ordre[-1], closest)
             self.ordre.append(closest.name)
-            print(f"ordre petit à petit: {self.ordre}")
+            #print(f"ordre petit à petit: {self.ordre}")
         self.ordre.append("0")
         
 

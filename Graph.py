@@ -3,16 +3,7 @@ Memorisation d'une liste de lieux """
 
 from define import *
 from Lieu import Lieu
-
-class matrice_od:
-    def __init__(self, matrice=None):
-        if matrice == None:
-            self.matrice = np.zeros((NB_LIEUX, NB_LIEUX)) # matrice de 0
-        else:
-            self.matrice = matrice
-
-    def __repr__(self):
-        return f'Matrice_od({self.matrice})'
+from Matrice_od import Matrice_od
 
 class Graph:
 
@@ -25,7 +16,7 @@ class Graph:
         else:
             self.charger_graph(csv_lieux)
         if csv_matrice == None:
-            self.matrice_cout = matrice_od()
+            self.matrice_cout = Matrice_od()
         else:
             self.charger_matrice_od(csv_matrice)
     
@@ -60,6 +51,11 @@ class Graph:
         print(f'closestN: {closest_N}')
         return pot_voisins[closest_N]
     
+    def calcul_distance_route(self, dist_total, lieuA, lieuB):
+        ligne = list(self.matrice_cout.matrice[int(lieuA.name)]) # va chercher la distance entre les deux leiu dans la matrice 
+        dist_total += ligne[lieuB]
+        return dist_total
+    
     def charger_graph(self, csv_file):
         with open(csv_file, 'r') as f:
             graph = csv.reader(f)
@@ -68,7 +64,7 @@ class Graph:
     def charger_matrice_od(self, csv_file):
         with open(csv_file, 'r') as f:
             matrice = csv.reader(f)
-        self.matrice_cout = matrice_od(matrice)
+        self.matrice_cout = Matrice_od(matrice)
 
     def __repr__(self):
             return f'Graph(\'{self.liste_lieux}\', {self.matrice_cout})'
