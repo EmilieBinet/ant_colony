@@ -1,4 +1,5 @@
 from Graph import Graph
+from Route import Route
 import tkinter as tk
 
 class Affichage (tk.Tk):
@@ -11,6 +12,7 @@ class Affichage (tk.Tk):
         self.title("G2 - Algo fourmis")
         self.draw_lieu(liste_lieux, largeur, hauteur)
         self.d_evolution(nb_it, best_dist)
+        self.bind("<space>", self.d_matrix)
         self.bind("<Escape>", self.close_f)
         self.mainloop()
 
@@ -18,6 +20,7 @@ class Affichage (tk.Tk):
     def d_evolution(self, nb_it, best_dist):
         evolution = tk.Label(self, text=f"nombre d'itérations: {nb_it}, meilleure distance: {best_dist}")
         evolution.pack()
+
 
     def draw_lieu(self, liste_lieux, largeur, hauteur):
         self.canvas = tk.Canvas(self, width=largeur, height=hauteur, bg='white')
@@ -27,8 +30,14 @@ class Affichage (tk.Tk):
             y = lieu.y
             self.canvas.create_oval(x, y, x+30, y+30)
 
+
     def d_route():
         pass
+
+
+    def d_matrix(self, event):
+        win = tk.Toplevel(self)
+        win.title("Matrix of cost")
 
 
     def close_f(self, event):
