@@ -28,8 +28,9 @@ class Affichage (tk.Tk):
         for lieu in liste_lieux:
             x = lieu.x
             y = lieu.y
+            name = lieu.name
+            self.canvas.create_text(x+15, y+15, text=name, font=("Arial", 15))
             self.canvas.create_oval(x, y, x+30, y+30)
-
 
     def d_route():
         pass
