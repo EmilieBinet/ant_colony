@@ -26,9 +26,13 @@ class TSP_ACO():
                     self.mat_prob_dist[i][j] = (1/matrice_cout[i][j])/sum_norm
                     self.mat_prob_dist[j][i] = (1/matrice_cout[i][j])/sum_norm
 
+    def update_mat_pheromone(self, noeud):
+        """"Met à jour la matrice de phéromones en fonction du noeaud qui vient d'être choisi par la fourmis et de la proximité entre les deux points"""
+        return
+    
+
 
 def main():
-    print(type(np.ones((NB_LIEUX, NB_LIEUX))))
     app = TSP_ACO()
 
 main()
