@@ -45,43 +45,39 @@ class Affichage (tk.Tk):
                     lieu_arr = lieu
             self.canvas.create_line(lieu_dep.x, lieu_dep.y, lieu_arr.x, lieu_arr.y, width=2)
 
+
     def draw_matrix(self, matrice, NB_LIEUX, hauteur):
-        for i in range(NB_LIEUX):
-            y = i*(hauteur/(NB_LIEUX))
-            for j in range(NB_LIEUX):
-                x = j*(hauteur/(NB_LIEUX))
+        for i in range(NB_LIEUX+1):
+            y = i*(hauteur/(NB_LIEUX+1))
+            for j in range(NB_LIEUX+1):
+                x = j*(hauteur/(NB_LIEUX+1))
 
                 # Dessiner le contour
-                cell_width = hauteur / NB_LIEUX
-                self.win.canvas.create_rectangle(x + 100, y, x + 100 + cell_width, y + cell_width, outline="black")
+                cell_width = hauteur / (NB_LIEUX+1)
+                self.win.canvas.create_rectangle(x , y, x + cell_width, y + cell_width, outline="black")
 
                 # Trouver le centre du rectangle
-                center_x = x + 100 + cell_width / 2
+                center_x = x + cell_width / 2
                 center_y = y + cell_width / 2
 
                 if i == 0 or j == 0:
-                    self.win.canvas.create_text(center_x, center_y, text=matrice[i][j], font=("bold"))
+                    if i == 0 and j == 0:
+                        self.win.canvas.create_text(center_x, center_y, text=" ", font=("bold"))
+                    elif i == 0:
+                        self.win.canvas.create_text(center_x, center_y, text=str(j-1), font=("bold"))
+                    elif j == 0:
+                        self.win.canvas.create_text(center_x, center_y, text=str(i-1), font=("bold"))
                 else: 
-                    self.win.canvas.create_text(center_x, center_y, text=matrice[i][j])
+                    self.win.canvas.create_text(center_x, center_y, text=matrice.matrice[i-1][j-1])
 
 
     def d_matrix(self, matrice):
-        largeur = 800
-        hauteur = 600
-        self.matrix = [
-            [" ","1", "2", "3"],
-            ["1", 1, 2, 3],
-            ["2", 4, 5, 6],
-            ["3", 7, 8, 9]
-        ]
+        dimension = 800
         self.win = tk.Toplevel(self)
         self.win.title("Matrix of cost")
-        self.win.canvas = tk.Canvas(self.win, width=800, height=600, bg="white")
-        self.win.canvas.pack(anchor=tk.CENTER)
-        # self.matrix_text = tk.Text(self.win, wrap=tk.NONE)
-        # self.matrix_text.pack()
-        
-        self.draw_matrix(matrice, len(matrice), hauteur)
+        self.win.canvas = tk.Canvas(self.win, width=dimension, height=dimension, bg="white")
+        self.win.canvas.pack(anchor=tk.CENTER)      
+        self.draw_matrix(matrice, len(matrice.matrice), dimension)
         
 
     def close_f(self, event):

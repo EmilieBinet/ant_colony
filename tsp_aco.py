@@ -9,7 +9,7 @@ class TSP_ACO():
     def __init__(self) -> None:
         graph = Graph()
         route = Route()
-        self.mat_pheromones = Matrice_od(np.ones((NB_LIEUX, NB_LIEUX))).get_mat()#Problème ici  : tente de créer une matrice_od, or la classe veut en argument une matrice = None
+        self.mat_pheromones = Matrice_od(np.ones((NB_LIEUX, NB_LIEUX)))#Problème ici  : tente de créer une matrice_od, or la classe veut en argument une matrice = None
         #mat_pheromones = mat_pheromones()
         self.mat_prob_dist= Matrice_od()
         fenetre = Affichage(graph, route, HAUTEUR, LARGEUR, NB_LIEUX, self.mat_pheromones)#fonctionne pour ce test unitaire
