@@ -45,7 +45,7 @@ class Affichage (tk.Tk):
                     lieu_arr = lieu
             self.canvas.create_line(lieu_dep.x, lieu_dep.y, lieu_arr.x, lieu_arr.y, width=2)
 
-    def draw_matrix(self, NB_LIEUX, hauteur):
+    def draw_matrix(self, matrice, NB_LIEUX, hauteur):
         for i in range(NB_LIEUX):
             y = i*(hauteur/(NB_LIEUX))
             for j in range(NB_LIEUX):
@@ -60,9 +60,9 @@ class Affichage (tk.Tk):
                 center_y = y + cell_width / 2
 
                 if i == 0 or j == 0:
-                    self.win.canvas.create_text(center_x, center_y, text=self.matrix[i][j], font=("bold"))
+                    self.win.canvas.create_text(center_x, center_y, text=matrice[i][j], font=("bold"))
                 else: 
-                    self.win.canvas.create_text(center_x, center_y, text=self.matrix[i][j])
+                    self.win.canvas.create_text(center_x, center_y, text=matrice[i][j])
 
 
     def d_matrix(self, matrice):
@@ -81,7 +81,7 @@ class Affichage (tk.Tk):
         # self.matrix_text = tk.Text(self.win, wrap=tk.NONE)
         # self.matrix_text.pack()
         
-        self.draw_matrix(len(matrice), hauteur)
+        self.draw_matrix(matrice, len(matrice), hauteur)
         
 
     def close_f(self, event):
