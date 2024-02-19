@@ -62,9 +62,10 @@ class Route:
 
             # print(f"dest_left: {dest_left}")
             prob_dest = [(1/d)/(sum(0 if elem == 0 else 1/elem for elem in dest_left)) for d in dest_left]
+            phero_dest = [(1/p)/(sum(0 if elem == 0 else 1/elem for elem in phero_left)) for p in phero_left]
             # print(f"prob_dest: {prob_dest}")
 
-            prob = random.choices(dest_left, weights=[0.4*d+0.6*p for d,p in zip(prob_dest, phero_left)], k=1)
+            prob = random.choices(dest_left, weights=[0.2*d+0.8*p for d,p in zip(prob_dest, phero_dest)], k=1)
             chosen_dest = [id for id, val in enumerate(destinations) if val == prob and str(id) not in self.ordre][0]
             # print(f"Prochain noeud : {chosen_dest}")
             self.dist_total = graph.calcul_distance_route(self.dist_total, int(self.ordre[-1]), chosen_dest)
