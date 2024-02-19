@@ -11,24 +11,16 @@ class Route:
 
         
     #Fonctions de comparaison des routes:
-    def __eq__(self, __value: object) -> bool:
-        pass
-    
-    def __ne__(self, __value: object) -> bool:
-        pass
+    def __eq__(self, other):
+        #==
+        if self.dist_total == other.dist_total:
+            pass
 
-    def __lt__(self, __value: object) -> bool:
-        pass
-
-    def __gt__(self, __value: object) -> bool:
-        pass
-
-    def __ge__(self, __value: object) -> bool:
-        pass
-    
-    def __le__(self, __value: object) -> bool:
-        pass
-
+    def __lt__(self, other):
+        #<
+        if self.dist_total < other.dist_total:
+            return 
+        
     def glouton(self, graph):
         self.ordre = ["0"]
         voisin = graph.liste_lieux[:]
@@ -46,7 +38,7 @@ class Route:
         voisin = graph.liste_lieux[:]
         while len(self.ordre) != NB_LIEUX:
             lieu_from=[lieu for lieu in graph.liste_lieux if lieu.name == self.ordre[-1]][0]
-            # # print(lieu_from)
+            # print(lieu_from)
             voisin.remove(lieu_from)
             # print(f"matrice_cout: {graph.matrice_cout.matrice}")
             destinations = graph.matrice_cout.matrice[int(lieu_from.name)]#cout_od
@@ -72,6 +64,7 @@ class Route:
             # print(f"Total : {self.dist_total}")
             self.ordre.append(str(chosen_dest))
         self.ordre.append("0")
+        return self.dist_total
 
     #Fonction pour afficher l'objet route
     def __repr__(self):
