@@ -10,15 +10,15 @@ class TSP_ACO():
         graph = Graph()
         self.mat_pheromones = Matrice_od(np.ones((NB_LIEUX, NB_LIEUX)))#Problème ici  : tente de créer une matrice_od, or la classe veut en argument une matrice = None
         print(f"matrice phéromones initiale: {self.mat_pheromones.matrice}")
-        # fenetre = Affichage(graph, route, HAUTEUR, LARGEUR, NB_LIEUX, self.mat_pheromones)#fonctionne pour ce test unitaire
         for i in range(NB_FOURMIS):
-            route = Route(graph, self.mat_pheromones.matrice)
-            print(f"route {i}: {route.ordre}")
-            dist = route.dist_total
+            self.route = Route(graph, self.mat_pheromones.matrice)
+            print(f"route {i}: {self.route.ordre}")
+            dist = self.route.dist_total
             # print(f"dist: {dist}")
-            self.update_mat_pheromones(route, graph, dist)
+            self.update_mat_pheromones(self.route, graph, dist)
             # print(f"matrice phéromones: {self.mat_pheromones.matrice}")
-        route.glouton(graph)
+        self.route.glouton(graph)
+        fenetre = Affichage(graph, self.route, HAUTEUR, LARGEUR, NB_LIEUX, self.mat_pheromones)#fonctionne pour ce test unitaire
 
     def update_mat_pheromones(self, route, graph, dist):
         """"Met à jour la matrice de phéromones en fonction de la route qui vient d'être choisie par la fourmi et de la proximité entre les deux points"""
