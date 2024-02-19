@@ -4,9 +4,7 @@
 from define import *
 
 class Affichage (tk.Tk):
-    def __init__(self, graph, route, hauteur, largeur, NB_LIEUX) -> None:
-        # g = Graph()
-        # r = Route()
+    def __init__(self, graph, route, hauteur, largeur, NB_LIEUX, matrice) -> None:
         liste_lieux = graph.liste_lieux
         lst_route = route.ordre
         print(lst_route)
@@ -17,7 +15,7 @@ class Affichage (tk.Tk):
         self.draw_lieu(liste_lieux, largeur, hauteur)
         self.draw_route(lst_route, liste_lieux)
         self.d_evolution(nb_it, best_dist)
-        self.bind("<space>", self.d_matrix)
+        self.bind("<space>", lambda event: self.d_matrix(matrice))
         self.bind("<Escape>", self.close_f)
         self.mainloop()
 
@@ -52,14 +50,22 @@ class Affichage (tk.Tk):
             y = i*(hauteur/(NB_LIEUX))
             for j in range(NB_LIEUX):
                 x = j*(hauteur/(NB_LIEUX))
+
+                # Dessiner le contour
+                cell_width = hauteur / NB_LIEUX
+                self.win.canvas.create_rectangle(x + 100, y, x + 100 + cell_width, y + cell_width, outline="black")
+
+                # Trouver le centre du rectangle
+                center_x = x + 100 + cell_width / 2
+                center_y = y + cell_width / 2
+
                 if i == 0 or j == 0:
-                    self.win.canvas.create_text(x+150, y+100, text=self.matrix[i][j], font=("bold"))
+                    self.win.canvas.create_text(center_x, center_y, text=self.matrix[i][j], font=("bold"))
                 else: 
-                    self.win.canvas.create_text(x+150, y+100, text=self.matrix[i][j])
-                #self.win.canvas.create_rectangle(x+200,y, x+(hauteur/(NB_LIEUX)), y+(hauteur/(NB_LIEUX)))
+                    self.win.canvas.create_text(center_x, center_y, text=self.matrix[i][j])
 
 
-    def d_matrix(self, event):
+    def d_matrix(self, matrice):
         largeur = 800
         hauteur = 600
         self.matrix = [
@@ -75,7 +81,7 @@ class Affichage (tk.Tk):
         # self.matrix_text = tk.Text(self.win, wrap=tk.NONE)
         # self.matrix_text.pack()
         
-        self.draw_matrix(len(self.matrix[0]), hauteur)
+        self.draw_matrix(len(matrice), hauteur)
         
 
     def close_f(self, event):
