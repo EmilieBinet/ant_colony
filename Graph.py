@@ -17,8 +17,10 @@ class Graph:
             self.charger_graph(csv_lieux)
         if csv_matrice == None:
             self.matrice_cout = Matrice_od()
+            self.calcul_matrice_cout_od()
         else:
             self.charger_matrice_od(csv_matrice)
+
     
     def calcul_matrice_cout_od(self):
         print(self.matrice_cout)
@@ -43,19 +45,17 @@ class Graph:
                 to_del.append(ligne[i]) # retiens l'element a supprimer
         for elem in to_del:
             ligne.remove(elem) # supprime chaque element
-        print(f'ligne: {ligne}')
+        # print(f'ligne: {ligne}')
         for i in range(len(ligne)):
             if ligne[i] < min:
                 min = ligne[i]
-                closest_N = i
-        print(f'closestN: {closest_N}')
-        return pot_voisins[closest_N]
+                knn = i
+        # print(f'closestN: {knn}')
+        return pot_voisins[knn]
     
     def calcul_distance_route(self, dist_total, lieuA, lieuB):
-        print(lieuA, type(lieuA))
-        print(lieuB,type(lieuB))
     
-        dist_total += self.matrice_cout.matrice[int(lieuA)] [int(lieuB.name)]# va chercher la distance entre les deux lieu dans la matrice 
+        dist_total += self.matrice_cout.matrice[lieuA][lieuB]# va chercher la distance entre les deux lieu dans la matrice 
         return dist_total
     
     def charger_graph(self, csv_file):

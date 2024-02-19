@@ -13,18 +13,12 @@ from Route import Route
 from Affichage import Affichage
 
 #tests unitaires
-lieu = Lieu()
-lieu2 = Lieu(1,1,"0")
-print(lieu)
-print(lieu2)
-
 graph = Graph()
 print(graph)
-graph.calcul_matrice_cout_od()
+matrice = graph.calcul_matrice_cout_od()
 print(graph)
-for i in range(0,N_ITERATION):
 
-    route = Route(graph)
-    print(route)
+route = Route(graph)
+print(route)
 
-    fenetre = Affichage(graph, route, HAUTEUR, LARGEUR, NB_LIEUX)#fonctionne pour ce test unitaire
+fenetre = Affichage(graph, route, HAUTEUR, LARGEUR, NB_LIEUX, matrice)#fonctionne pour ce test unitaire
