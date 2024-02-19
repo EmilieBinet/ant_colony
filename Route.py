@@ -46,7 +46,7 @@ class Route:
         voisin = graph.liste_lieux[:]
         while len(self.ordre) != NB_LIEUX:
             lieu_from=[lieu for lieu in graph.liste_lieux if lieu.name == self.ordre[-1]][0]
-            # print(lieu_from)
+            # # print(lieu_from)
             voisin.remove(lieu_from)
             # print(f"matrice_cout: {graph.matrice_cout.matrice}")
             destinations = graph.matrice_cout.matrice[int(lieu_from.name)]#cout_od
@@ -65,7 +65,7 @@ class Route:
             phero_dest = [(1/p)/(sum(0 if elem == 0 else 1/elem for elem in phero_left)) for p in phero_left]
             # print(f"prob_dest: {prob_dest}")
 
-            prob = random.choices(dest_left, weights=[0.2*d+0.8*p for d,p in zip(prob_dest, phero_dest)], k=1)
+            prob = random.choices(dest_left, weights=[0.4*d+0.6*p for d,p in zip(prob_dest, phero_left)], k=1)
             chosen_dest = [id for id, val in enumerate(destinations) if val == prob and str(id) not in self.ordre][0]
             # print(f"Prochain noeud : {chosen_dest}")
             self.dist_total = graph.calcul_distance_route(self.dist_total, int(self.ordre[-1]), chosen_dest)
