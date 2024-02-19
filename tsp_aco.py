@@ -7,12 +7,18 @@ from Route import Route
 
 class TSP_ACO():
     def __init__(self) -> None:
+<<<<<<< HEAD
         graph = Graph()
         route = Route()
         mat_pheromones = Matrice_od(np.ones((NB_LIEUX, NB_LIEUX)))#Problème ici  : tente de créer une matrice_od, or la classe veut en argument une matrice = None
         #mat_pheromones = mat_pheromones()
         mat_prob_dist= Matrice_od()
         fenetre = Affichage(graph, route, HAUTEUR, LARGEUR, NB_LIEUX, mat_pheromones)#fonctionne pour ce test unitaire
+=======
+        self.mat_pheromones = Matrice_od(np.ones((NB_LIEUX, NB_LIEUX)))#Problème ici  : tente de créer une matrice_od, or la classe veut en argument une matrice = None
+        #mat_pheromones = mat_pheromones()
+        self.mat_prob_dist= Matrice_od()
+>>>>>>> 7effb7b (random choice + Réparation de class matrice_od)
 
     def init_prob_dist(self, matrice_cout):
         # calcul de la matrice de prob dist: (1/dist)/(sum(1/autres_dist))
@@ -26,9 +32,13 @@ class TSP_ACO():
                     self.mat_prob_dist[i][j] = (1/matrice_cout[i][j])/sum_norm
                     self.mat_prob_dist[j][i] = (1/matrice_cout[i][j])/sum_norm
 
+    def update_mat_pheromone(self, noeud):
+        """"Met à jour la matrice de phéromones en fonction du noeaud qui vient d'être choisi par la fourmis et de la proximité entre les deux points"""
+        return
+    
+
 
 def main():
-    print(type(np.ones((NB_LIEUX, NB_LIEUX))))
     app = TSP_ACO()
 
 main()
