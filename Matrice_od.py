@@ -1,9 +1,9 @@
 from define import *
 
 class Matrice_od:
-    def __init__(self, matrice):
+    def __init__(self, matrice=[]):
         
-        if matrice == None:
+        if len(matrice) == 0:
             self.matrice = np.zeros((NB_LIEUX, NB_LIEUX)) # matrice de 0
         else:
             self.matrice = matrice

@@ -28,6 +28,7 @@ class TSP_ACO():
 
 
 def main():
+    print(type(np.ones((NB_LIEUX, NB_LIEUX))))
     app = TSP_ACO()
 
 main()
