@@ -63,8 +63,8 @@ class Affichage (tk.Tk):
         self.canvas.delete("all")
         self.d_mat_cout(liste_lieux, matrice)
         self.draw_lieu(liste_lieux)
-        self.draw_best_route(route, liste_lieux)
-        self.evolution.config(text=f"nombre d'itérations: {nb_it}, best route: {route}")
+        self.draw_best_route(route.ordre, liste_lieux)
+        self.evolution.config(text=f"nombre d'itérations: {nb_it}, dist: {route.dist_total}")
         self.bind("<Escape>", self.close_f)
 
 

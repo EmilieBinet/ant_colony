@@ -36,7 +36,7 @@ class TSP_ACO():
             # print(f"dist: {dist}")
             self.update_mat_pheromones(route, graph, dist, extra)
             print(f"matrice phéromones: {self.mat_pheromones.matrice}\n")
-            self.fenetre.update_win(route=self.best_route.ordre, liste_lieux=graph.liste_lieux, matrice=self.mat_pheromones, nb_it=nb_it)
+            self.fenetre.update_win(route=self.best_route, liste_lieux=graph.liste_lieux, matrice=self.mat_pheromones, nb_it=nb_it)
             self.fenetre.update_idletasks()
             self.fenetre.update()
         print(f"glouton_dist: {glouton_dist}")
