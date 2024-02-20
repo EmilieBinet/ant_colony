@@ -24,6 +24,7 @@ class Graph:
     
     def calcul_matrice_cout_od(self):
         print(self.matrice_cout)
+        print(self.liste_lieux)
         for i in range(0, NB_LIEUX):
             for j in range(i, NB_LIEUX):
                 lieu_i, lieu_j = self.liste_lieux[i], self.liste_lieux[j]
@@ -59,8 +60,14 @@ class Graph:
     
     def charger_graph(self, csv_file):
         with open(csv_file, 'r') as f:
+            i=0
             graph = csv.reader(f)
-        self.liste_lieux = graph
+            for ligne in graph:
+                if i!=0:
+                    lieu = Lieu(float(ligne[0]), float(ligne[1]), str(i-1))
+                    self.liste_lieux.append(lieu)
+                i+=1
+            print(len(self.liste_lieux))
     
     def charger_matrice_od(self, csv_file):
         with open(csv_file, 'r') as f:

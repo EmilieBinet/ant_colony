@@ -6,8 +6,8 @@ from Graph import Graph
 from Route import Route
 
 class TSP_ACO():
-    def __init__(self) -> None:
-        graph = Graph()
+    def __init__(self, csv_file = None) -> None:
+        graph = Graph(csv_file)
         self.mat_pheromones = Matrice_od(np.ones((NB_LIEUX, NB_LIEUX)))#Problème ici  : tente de créer une matrice_od, or la classe veut en argument une matrice = None
         print(f"matrice phéromones initiale: {self.mat_pheromones.matrice}")
         route_glouton = Route()
@@ -51,7 +51,3 @@ class TSP_ACO():
     
 
 
-def main():
-    app = TSP_ACO()
-
-main()
