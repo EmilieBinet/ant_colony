@@ -13,18 +13,8 @@ from Route import Route
 from Affichage import Affichage
 from tsp_aco import TSP_ACO
 
-# #tests unitaires
-# graph = Graph()
-# print(graph)
-# matrice = graph.calcul_matrice_cout_od()
-# print(graph)
-
-# route = Route(graph)
-# print(route)
-
-# fenetre = Affichage(graph, route, HAUTEUR, LARGEUR, NB_LIEUX, matrice)#fonctionne pour ce test unitaire
 
 def main():
-    app = TSP_ACO()
+    app = TSP_ACO()#Vide si pas de fichier. Sinon prends en argument le chemin du fichier .csv
 
 main()
