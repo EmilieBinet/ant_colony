@@ -1,9 +1,5 @@
 # -*- coding: utf-8 -*-
-"""
-Created on Mon Feb 12 14:36:13 2024
 
-@author: maelb
-"""
 from define import *
 
 #Import Class
@@ -15,6 +11,7 @@ from tsp_aco import TSP_ACO
 
 
 def main():
-    app = TSP_ACO("csv/graph_30.csv")
+    """To use with a .csv file already containing points coordinates: add r'YOUR_CSV_PATH' as an argument of TSP_ACO()"""
+    app = TSP_ACO()
 
 main()
