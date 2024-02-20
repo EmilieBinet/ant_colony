@@ -25,6 +25,6 @@ from tsp_aco import TSP_ACO
 # fenetre = Affichage(graph, route, HAUTEUR, LARGEUR, NB_LIEUX, matrice)#fonctionne pour ce test unitaire
 
 def main():
-    app = TSP_ACO()
+    app = TSP_ACO("csv/graph_30.csv")
 
 main()

@@ -31,6 +31,7 @@ class Route:
             self.dist_total = graph.calcul_distance_route(self.dist_total, int(self.ordre[-1]), int(closest.name))
             self.ordre.append(closest.name)
         self.ordre.append("0")
+        self.dist_total = graph.calcul_distance_route(self.dist_total, int(self.ordre[-2]), int(self.ordre[-1]))
         # print(f"Glouton {self.ordre}")
 
     def ant_route(self, graph, matrice_phero):
@@ -70,6 +71,8 @@ class Route:
             # print(f"Total : {self.dist_total}")
             self.ordre.append(str(chosen_dest))
         self.ordre.append("0")
+        self.dist_total = graph.calcul_distance_route(self.dist_total, int(self.ordre[-2]), int(self.ordre[-1]))
+
         return self.dist_total
 
     #Fonction pour afficher l'objet route

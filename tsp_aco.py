@@ -8,29 +8,29 @@ from Route import Route
 class TSP_ACO():
     def __init__(self, csv_file = None) -> None:
         graph = Graph(csv_file)
-        self.mat_pheromones = Matrice_od(np.ones((NB_LIEUX, NB_LIEUX)))#Problème ici  : tente de créer une matrice_od, or la classe veut en argument une matrice = None
+        self.mat_pheromones = Matrice_od(np.ones((NB_LIEUX, NB_LIEUX)))#initialise une matrice avec des 1 pour les phéromones
         # print(f"matrice phéromones initiale: {self.mat_pheromones.matrice}")
-        route_glouton = Route()
+        route_glouton = Route()# créé une première route pour qui on va executer l'algorithme glouton 
         route_glouton.glouton(graph)
-        self.best_route=route_glouton
-        glouton_dist = route_glouton.dist_total
-        self.update_mat_pheromones(route_glouton, graph, glouton_dist, 1)
+        self.best_route=route_glouton# route gloutonne gardée en tant que meilleure route 
+        glouton_dist = route_glouton.dist_total#récupère la distance de la route gloutonne  
+        self.update_mat_pheromones(route_glouton, graph, glouton_dist, 1)# emt à jour les phéromones en en ajoutant sur la route gloutonne 
         # print(glouton_dist)
-        min_dist=glouton_dist
-        self.fenetre = Affichage(graph, self.best_route, HAUTEUR, LARGEUR, NB_LIEUX, self.mat_pheromones)#fonctionne pour ce test unitaire
+        min_dist=glouton_dist# distance gloutonne gardée en tant que distance la plus petite  
+        self.fenetre = Affichage(graph, self.best_route, HAUTEUR, LARGEUR, NB_LIEUX, self.mat_pheromones)# affichage de la fenêtre
 
         for i in range(NB_FOURMIS):
             nb_it = i
             extra=None
-            route = Route(graph, self.mat_pheromones.matrice)
+            route = Route(graph, self.mat_pheromones.matrice)# récupère la route de la fourmi 
             # print(f"route {i}: {route.ordre}")
-            dist = route.dist_total
+            dist = route.dist_total# récupère la distance de cette route 
             # print(min_dist, dist)
-            if dist<min_dist:
+            if dist<min_dist:# compare la distance à celle de la meilleure route 
                 # print("min")
-                extra=1
-                min_dist = dist
-                self.best_route=route
+                extra=1# pour ajouter un bonus de phéromones 
+                min_dist = dist# la distance devient la meilleure distance 
+                self.best_route=route# idem pour la meilleure route 
             else:
                 extra=0
             # print(f"dist: {dist}")

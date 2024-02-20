@@ -47,17 +47,17 @@ class Affichage (tk.Tk):
     def d_mat_cout(self, liste_lieux, matrice):
         self.canvas.delete("all")
         for i in range(NB_LIEUX):
-            for j in range(i, NB_LIEUX):
+            for j in range(i, NB_LIEUX): 
                 pt_a = liste_lieux[i]
                 pt_b = liste_lieux[j]
                 width = matrice.matrice[i][j]
                 if width > MAX:
                     width = MAX
-                    self.canvas.create_line(pt_a.x, pt_a.y+15, pt_b.x, pt_b.y+15, width=width/50, fill="black")
+                    self.canvas.create_line(pt_a.x, pt_a.y+15, pt_b.x, pt_b.y+15, width=width/50, fill="grey")
                 elif width < MIN:
                     continue
                 else:
-                    self.canvas.create_line(pt_a.x, pt_a.y+15, pt_b.x, pt_b.y+15, width=width/50, fill="black")
+                    self.canvas.create_line(pt_a.x, pt_a.y+15, pt_b.x, pt_b.y+15, width=width/50, fill="grey")
 
     def incr(self):
         self.display += 1
