@@ -44,12 +44,7 @@ class TSP_ACO():
     def update_mat_pheromones(self, route, graph, dist, extra):
         """"Met à jour la matrice de phéromones en fonction de la route qui vient d'être choisie par la fourmi et de la proximité entre les deux points"""
         extra_phero = extra*20
-        # if extra==1: 
-            # print(f'###########extra: {extra_phero}') 
-        for i in range(NB_LIEUX):
-            for j in range(i, NB_LIEUX):
-                self.mat_pheromones.matrice[i][j] = self.mat_pheromones.matrice[i][j] * 0.999
-                self.mat_pheromones.matrice[j][i] = self.mat_pheromones.matrice[j][i] * 0.999
+        self.mat_pheromones.matrice *= 0.999
         for i in range(len(route.ordre)-1):
             self.mat_pheromones.matrice[int(route.ordre[i])][int(route.ordre[i+1])] = (self.mat_pheromones.matrice[int(route.ordre[i])][int(route.ordre[i+1])] / 0.999 + (1000/dist) + extra_phero )
             self.mat_pheromones.matrice[int(route.ordre[i+1])][int(route.ordre[i])] = (self.mat_pheromones.matrice[int(route.ordre[i+1])][int(route.ordre[i])] / 0.999 + (1000/dist) + extra_phero )
