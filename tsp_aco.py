@@ -10,9 +10,9 @@ class TSP_ACO():
         graph = Graph()
         self.mat_pheromones = Matrice_od(np.ones((NB_LIEUX, NB_LIEUX)))#Problème ici  : tente de créer une matrice_od, or la classe veut en argument une matrice = None
         print(f"matrice phéromones initiale: {self.mat_pheromones.matrice}")
-        # fenetre = Affichage(graph, route, HAUTEUR, LARGEUR, NB_LIEUX, self.mat_pheromones)#fonctionne pour ce test unitaire
         route_glouton = Route()
         route_glouton.glouton(graph)
+        self.fenetre = Affichage(graph, route_glouton, HAUTEUR, LARGEUR, NB_LIEUX, self.mat_pheromones)#fonctionne pour ce test unitaire
         min_dist = route_glouton.dist_total
         print(min_dist)
         for i in range(NB_FOURMIS):
@@ -27,6 +27,9 @@ class TSP_ACO():
             # print(f"dist: {dist}")
             self.update_mat_pheromones(route, graph, dist, extra)
             print(f"matrice phéromones: {self.mat_pheromones.matrice}\n")
+            self.fenetre.update_win(route=route.ordre, liste_lieux=graph.liste_lieux, matrice=self.mat_pheromones)
+            self.fenetre.update_idletasks()
+            self.fenetre.update()
         # route.glouton(graph)
         # print(f"dist: {dist}")
 

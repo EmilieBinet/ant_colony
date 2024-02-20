@@ -12,14 +12,16 @@ class Affichage (tk.Tk):
         nb_it = NB_IT
         #best_dist = 0
         self.title("G2 - Algo fourmis")
-        self.draw_lieu(liste_lieux, largeur, hauteur)
+        self.canvas = tk.Canvas(self, width=largeur, height=hauteur, bg='white')
+        self.canvas.pack(anchor=tk.CENTER, expand=True)
+        self.draw_lieu(liste_lieux)
         # self.draw_route_init(lst_route, liste_lieux)
         self.d_evolution(nb_it)
         self.draw_best_route(lst_route, liste_lieux)
-        self.bind("<space>", lambda event: self.d_mat_cout(liste_lieux, matrice, lst_route))
+        self.bind("<space>", lambda event: self.d_mat_cout(liste_lieux, matrice))
         self.bind("<Escape>", self.close_f)
-        #self.update_win(liste_lieux=liste_lieux, route=route, matrice=matrice)
-        self.mainloop()
+        #self.update_win(liste_lieux=liste_lieux, route=lst_route, matrice=matrice)
+        #self.mainloop()
 
 
     def d_evolution(self, nb_it):
@@ -27,9 +29,8 @@ class Affichage (tk.Tk):
         evolution.pack()
 
 
-    def draw_lieu(self, liste_lieux, largeur, hauteur):
-        self.canvas = tk.Canvas(self, width=largeur, height=hauteur, bg='white')
-        self.canvas.pack(anchor=tk.CENTER, expand=True)
+    def draw_lieu(self, liste_lieux):
+        #self.canvas.delete("all")
         for lieu in liste_lieux:
             x = lieu.x
             y = lieu.y
@@ -39,6 +40,7 @@ class Affichage (tk.Tk):
 
 
     def draw_best_route(self, route, liste_lieux):
+        #self.canvas.delete("all")
         for i in range(len(route)-1):
             for lieu in liste_lieux:
                 if lieu.name == route[i]:
@@ -48,23 +50,26 @@ class Affichage (tk.Tk):
             self.canvas.create_line(lieu_dep.x, lieu_dep.y+15, lieu_arr.x, lieu_arr.y+15, width=5, fill="blue", dash=30)
 
 
-    def d_mat_cout(self, liste_lieux, matrice, route):
+    def d_mat_cout(self, liste_lieux, matrice):
+        self.canvas.delete("all")
         for i in range(NB_LIEUX):
             for j in range(i, NB_LIEUX):
                 pt_a = liste_lieux[i]
                 pt_b = liste_lieux[j]
                 width = matrice.matrice[i][j]
                 self.canvas.create_line(pt_a.x, pt_a.y+15, pt_b.x, pt_b.y+15, width=width, fill="black")
-        #self.draw_best_route(route, liste_lieux)
 
     
     def update_win(self, liste_lieux, matrice, route): #finir fonction
-        self.d_mat_cout(liste_lieux, matrice, route)
+        print("update")
+        self.canvas.delete("all")
+        self.d_mat_cout(liste_lieux, matrice) #erreur d'appel de canvas
+        self.draw_lieu(liste_lieux)
         self.draw_best_route(route, liste_lieux)
         self.d_evolution(NB_IT)
-        self.update()
-        self.update_idletasks()
+        #self.after(1000, lambda event: self.update_win(liste_lieux, matrice, route))
 
 
     def close_f(self, event):
         self.destroy()
+        #exit(0)
