@@ -20,7 +20,7 @@ class TSP_ACO():
         self.fenetre = Affichage(graph, self.best_route, HAUTEUR, LARGEUR, NB_LIEUX, self.mat_pheromones)#fonctionne pour ce test unitaire
 
         for i in range(NB_FOURMIS):
-            NB_IT = i
+            nb_it = i
             extra=None
             route = Route(graph, self.mat_pheromones.matrice)
             print(f"route {i}: {route.ordre}")
@@ -36,7 +36,7 @@ class TSP_ACO():
             # print(f"dist: {dist}")
             self.update_mat_pheromones(route, graph, dist, extra)
             print(f"matrice phéromones: {self.mat_pheromones.matrice}\n")
-            self.fenetre.update_win(route=self.best_route.ordre, liste_lieux=graph.liste_lieux, matrice=self.mat_pheromones)
+            self.fenetre.update_win(route=self.best_route.ordre, liste_lieux=graph.liste_lieux, matrice=self.mat_pheromones, nb_it=nb_it)
             self.fenetre.update_idletasks()
             self.fenetre.update()
         print(f"glouton_dist: {glouton_dist}")

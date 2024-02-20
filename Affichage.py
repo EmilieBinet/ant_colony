@@ -67,14 +67,14 @@ class Affichage (tk.Tk):
                     self.canvas.create_line(pt_a.x, pt_a.y+15, pt_b.x, pt_b.y+15, width=width/50, fill="black")
 
     
-    def update_win(self, liste_lieux, matrice, route): #finir fonction
+    def update_win(self, liste_lieux, matrice, route, nb_it): #finir fonction
         print("update")
         self.canvas.delete("all")
         self.d_mat_cout(liste_lieux, matrice)
         self.draw_lieu(liste_lieux)
         self.draw_best_route(route, liste_lieux)
-        # self.evolution.config(text=f"nombre d'itérations: {NB_IT}")
-        self.d_evolution(NB_IT)
+        self.evolution.config(text=f"nombre d'itérations: {nb_it}, best route: {route}")
+        #self.d_evolution(NB_IT)
         self.bind("<Escape>", self.close_f)
         #self.after(1000, lambda event: self.update_win(liste_lieux, matrice, route))
 
