@@ -11,15 +11,15 @@ class Route:
 
         
     #Fonctions de comparaison des routes:
-    def __eq__(self, other):
-        #==
-        if self.dist_total == other.dist_total:
-            pass
+    # def __eq__(self, other):
+    #     #==
+    #     if self.dist_total == other.dist_total:
+    #         pass
 
-    def __lt__(self, other):
-        #<
-        if self.dist_total < other.dist_total:
-            return 
+    # def __lt__(self, other):
+    #     #<
+    #     if self.dist_total < other.dist_total:
+    #         return 
         
     def glouton(self, graph):
         self.ordre = ["0"]
@@ -31,7 +31,7 @@ class Route:
             self.dist_total = graph.calcul_distance_route(self.dist_total, int(self.ordre[-1]), int(closest.name))
             self.ordre.append(closest.name)
         self.ordre.append("0")
-        print(f"Glouton {self.ordre}")
+        # print(f"Glouton {self.ordre}")
 
     def ant_route(self, graph, matrice_phero):
         self.ordre = ["0"]
@@ -53,8 +53,14 @@ class Route:
                     phero_left.append(pheromones[i])
 
             # print(f"dest_left: {dest_left}")
-            prob_dest = [(1/d)/(sum(0 if elem == 0 else 1/elem for elem in dest_left)) for d in dest_left]
-            phero_dest = [(p)/(sum(0 if elem == 0 else elem for elem in phero_left)) for p in phero_left]
+            prob_sum = sum(0 if elem == 0 else 1/elem for elem in dest_left)
+            if prob_sum == 0:
+                prob_sum = 1
+            phero_sum = sum(elem for elem in phero_left)
+            if phero_sum == 0:
+                phero_sum = 1
+            prob_dest = [(1/d)/prob_sum for d in dest_left]
+            phero_dest = [p/phero_sum for p in phero_left]
             # print(f"prob_dest: {prob_dest}")
 
             prob = random.choices(dest_left, weights=[0.4*d+0.6*p for d,p in zip(prob_dest, phero_left)], k=1)

@@ -4,9 +4,10 @@ class Affichage (tk.Tk):
     def __init__(self, graph, route, hauteur, largeur, NB_IT, matrice) -> None:
         liste_lieux = graph.liste_lieux
         lst_route = route.ordre
-        print("route dans affichage ", lst_route)
+        # print("route dans affichage ", lst_route)
         tk.Tk.__init__(self)
         nb_it = NB_IT
+        self.display = 0
         self.title("G2 - Algo fourmis")
         self.canvas = tk.Canvas(self, width=largeur, height=hauteur, bg='white')
         self.canvas.pack(anchor=tk.CENTER, expand=True)
@@ -39,6 +40,7 @@ class Affichage (tk.Tk):
                     lieu_dep= lieu
                 if lieu.name == route[i+1]:
                     lieu_arr = lieu
+            self.canvas.create_text(lieu_dep.x+15, lieu_dep.y-15, text=str(i), font=("Arial", 10), fill="blue")
             self.canvas.create_line(lieu_dep.x, lieu_dep.y+15, lieu_arr.x, lieu_arr.y+15, width=5, fill="blue", dash=30)
 
 
@@ -57,11 +59,15 @@ class Affichage (tk.Tk):
                 else:
                     self.canvas.create_line(pt_a.x, pt_a.y+15, pt_b.x, pt_b.y+15, width=width/50, fill="black")
 
-    
+    def incr(self):
+        self.display += 1
+
     def update_win(self, liste_lieux, matrice, route, nb_it):
-        print("update")
+        # print("update")
         self.canvas.delete("all")
-        self.d_mat_cout(liste_lieux, matrice)
+        self.bind("<space>", lambda event: self.incr())
+        if self.display % 2 == 1:
+            self.d_mat_cout(liste_lieux, matrice)
         self.draw_lieu(liste_lieux)
         self.draw_best_route(route.ordre, liste_lieux)
         self.evolution.config(text=f"nombre d'itérations: {nb_it}, dist: {route.dist_total}")
