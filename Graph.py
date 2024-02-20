@@ -55,7 +55,7 @@ class Graph:
         return pot_voisins[knn]
     
     def calcul_distance_route(self, dist_total, lieuA, lieuB):
-        dist_total += self.matrice_cout.matrice[lieuA][lieuB]# va chercher la distance entre les deux lieu dans la matrice 
+        dist_total += self.matrice_cout.matrice[lieuA][lieuB]# va chercher la distance entre les deux lieux dans la matrice de cout
         return dist_total
     
     def charger_graph(self, csv_file):

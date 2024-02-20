@@ -5,23 +5,11 @@ from Matrice_od import Matrice_od
 class Route:
 
     def __init__(self, graph=Graph(), matrice_phero=Matrice_od(np.ones((NB_LIEUX, NB_LIEUX))).matrice):
-        # self.glouton(graph)
         self.dist_total=0
         self.ant_route(graph, matrice_phero)
 
-        
-    #Fonctions de comparaison des routes:
-    # def __eq__(self, other):
-    #     #==
-    #     if self.dist_total == other.dist_total:
-    #         pass
-
-    # def __lt__(self, other):
-    #     #<
-    #     if self.dist_total < other.dist_total:
-    #         return 
-        
     def glouton(self, graph):
+        """Chemin heuristique. En utilisant les chemins les plus court pour chaque noeuds."""
         self.ordre = ["0"]
         voisin = graph.liste_lieux[:]
         while len(self.ordre) != NB_LIEUX:
@@ -35,6 +23,7 @@ class Route:
         # print(f"Glouton {self.ordre}")
 
     def ant_route(self, graph, matrice_phero):
+        """Parcours d'une fourmis et ajout de phéromones"""
         self.ordre = ["0"]
         voisin = graph.liste_lieux[:]
         while len(self.ordre) != NB_LIEUX:
