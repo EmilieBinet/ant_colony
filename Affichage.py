@@ -18,15 +18,16 @@ class Affichage (tk.Tk):
         # self.draw_route_init(lst_route, liste_lieux)
         self.d_evolution(nb_it)
         self.draw_best_route(lst_route, liste_lieux)
-        self.bind("<space>", lambda event: self.d_mat_cout(liste_lieux, matrice))
+        self.d_mat_cout(liste_lieux, matrice)
+        #self.bind("<space>", lambda event: self.d_mat_cout(liste_lieux, matrice))
         self.bind("<Escape>", self.close_f)
         #self.update_win(liste_lieux=liste_lieux, route=lst_route, matrice=matrice)
         #self.mainloop()
 
 
     def d_evolution(self, nb_it):
-        evolution = tk.Label(self, text=f"nombre d'itérations: {nb_it}")
-        evolution.pack()
+        self.evolution = tk.Label(self, text=f"nombre d'itérations: {nb_it}")
+        self.evolution.pack()
 
 
     def draw_lieu(self, liste_lieux):
@@ -57,19 +58,28 @@ class Affichage (tk.Tk):
                 pt_a = liste_lieux[i]
                 pt_b = liste_lieux[j]
                 width = matrice.matrice[i][j]
-                self.canvas.create_line(pt_a.x, pt_a.y+15, pt_b.x, pt_b.y+15, width=width, fill="black")
+                if width > MAX:
+                    width = MAX
+                    self.canvas.create_line(pt_a.x, pt_a.y+15, pt_b.x, pt_b.y+15, width=width/50, fill="black")
+                elif width < MIN:
+                    continue
+                else:
+                    self.canvas.create_line(pt_a.x, pt_a.y+15, pt_b.x, pt_b.y+15, width=width/50, fill="black")
 
     
     def update_win(self, liste_lieux, matrice, route): #finir fonction
         print("update")
         self.canvas.delete("all")
-        self.d_mat_cout(liste_lieux, matrice) #erreur d'appel de canvas
+        self.d_mat_cout(liste_lieux, matrice)
         self.draw_lieu(liste_lieux)
         self.draw_best_route(route, liste_lieux)
+        # self.evolution.config(text=f"nombre d'itérations: {NB_IT}")
         self.d_evolution(NB_IT)
+        self.bind("<Escape>", self.close_f)
         #self.after(1000, lambda event: self.update_win(liste_lieux, matrice, route))
 
 
     def close_f(self, event):
         self.destroy()
-        #exit(0)
+        exit(0)
+
